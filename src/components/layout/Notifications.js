@@ -14,10 +14,11 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatIcon from "@material-ui/icons/Chat";
 // Redux
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { markNotificationsRead } from "../../redux/actions/userActions";
 
-const Notifications = ({ notifications }) => {
+const Notifications = () => {
+  const notifications = useSelector(state => state.user.notifications);
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 
