@@ -21,37 +21,37 @@ import ChatIcon from '@material-ui/icons/Chat';
 import { connect } from 'react-redux';
 import { getScream, clearErrors } from '../../redux/actions/dataActions';
 
-const styles = theme => ({
-  ...theme.spreadIt,
+const styles = (theme) => ({
+  ...theme,
   profileImage: {
     maxWidth: 200,
     height: 200,
     borderRadius: '50%',
-    objectFit: 'cover',
+    objectFit: 'cover'
   },
   dialogContent: {
-    padding: 20,
+    padding: 20
   },
   closeButton: {
     position: 'absolute',
-    left: '90%',
+    left: '90%'
   },
   expandButton: {
     position: 'absolute',
-    left: '90%',
+    left: '90%'
   },
   spinnerDiv: {
     textAlign: 'center',
     marginTop: 50,
-    marginBottom: 50,
-  },
+    marginBottom: 50
+  }
 });
 
 class ScreamDialog extends Component {
   state = {
     open: false,
     oldPath: '',
-    newPath: '',
+    newPath: ''
   };
   componentDidMount() {
     if (this.props.openDialog) {
@@ -88,9 +88,9 @@ class ScreamDialog extends Component {
         commentCount,
         userImage,
         userHandle,
-        comments,
+        comments
       },
-      UI: { loading },
+      UI: { loading }
     } = this.props;
 
     const dialogMarkup = loading ? (
@@ -98,7 +98,7 @@ class ScreamDialog extends Component {
         <CircularProgress size={200} thickness={2} />
       </div>
     ) : (
-      <Grid container>
+      <Grid container spacing={16}>
         <Grid item sm={5}>
           <img src={userImage} alt="Profile" className={classes.profileImage} />
         </Grid>
@@ -125,7 +125,6 @@ class ScreamDialog extends Component {
           <span>{commentCount} comments</span>
         </Grid>
         <hr className={classes.visibleSeparator} />
-
         <CommentForm screamId={screamId} />
         <Comments comments={comments} />
       </Grid>
@@ -143,7 +142,7 @@ class ScreamDialog extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           fullWidth
-          maxWidth="md"
+          maxWidth="sm"
         >
           <MyButton
             tip="Close"
@@ -167,20 +166,20 @@ ScreamDialog.propTypes = {
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   scream: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   scream: state.data.scream,
-  UI: state.UI,
+  UI: state.UI
 });
 
 const mapActionsToProps = {
   getScream,
-  clearErrors,
+  clearErrors
 };
 
 export default connect(
   mapStateToProps,
-  mapActionsToProps,
+  mapActionsToProps
 )(withStyles(styles)(ScreamDialog));

@@ -1,17 +1,23 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const AuthRoute = ({ component: Component, ...rest }) => {
-  const authenticated = useSelector(state => state.user.authenticated);
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        authenticated === true ? <Redirect to="/" /> : <Component {...props} />
-      }
-    />
-  );
+const AuthRoute = ({ component: Component, authenticated, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      authenticated === true ? <Redirect to="/" /> : <Component {...props} />
+    }
+  />
+);
+
+const mapStateToProps = (state) => ({
+  authenticated: state.user.authenticated
+});
+
+AuthRoute.propTypes = {
+  user: PropTypes.object
 };
 
-export default AuthRoute;
+export default connect(mapStateToProps)(AuthRoute);

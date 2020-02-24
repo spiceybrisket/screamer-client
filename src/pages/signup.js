@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
-import PropTypes from "prop-types";
-import AppIcon from "../images/icon.png";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
+import PropTypes from 'prop-types';
+import AppIcon from '../images/icon.png';
+import { Link } from 'react-router-dom';
 
 // MUI Stuff
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // Redux stuff
-import { connect } from "react-redux";
-import { signupUser } from "../redux/actions/userActions";
+import { connect } from 'react-redux';
+import { signupUser } from '../redux/actions/userActions';
 
-const styles = theme => ({
-  ...theme.spreadIt
+const styles = (theme) => ({
+  ...theme
 });
 
 class signup extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
-      confirmPassword: "",
-      handle: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
+      handle: '',
       errors: {}
     };
   }
@@ -34,7 +34,7 @@ class signup extends Component {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
       loading: true
@@ -47,7 +47,7 @@ class signup extends Component {
     };
     this.props.signupUser(newUserData, this.props.history);
   };
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -152,11 +152,12 @@ signup.propTypes = {
   signupUser: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
   UI: state.UI
 });
 
-export default connect(mapStateToProps, { signupUser })(
-  withStyles(styles)(signup)
-);
+export default connect(
+  mapStateToProps,
+  { signupUser }
+)(withStyles(styles)(signup));
